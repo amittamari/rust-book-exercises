@@ -45,7 +45,8 @@ fn fahrenheit_to_celsius(temp: &f64) -> f64 {
 }
 
 fn parse_measurement_input(input: &String) -> (f64, char) {
-    let (measurement, unit) = input.split_at(input.len() - 2);
+    let input = input.trim_end();
+    let (measurement, unit) = input.split_at(input.len() - 1);
 
     let measurement = match measurement.parse::<f64>() {
         Ok(measurement) => measurement,
@@ -58,7 +59,6 @@ fn parse_measurement_input(input: &String) -> (f64, char) {
     };
 
     let unit: char = unit
-        .trim_end()
         .to_ascii_uppercase()
         .parse()
         .expect("Failed to read unit from input");
